@@ -176,7 +176,12 @@
   @media print {
     body { background: white; }
     header.titleblock { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    h2.section-title { page-break-before: always; }
+    /* Avoid orphaning a section title alone at the bottom of a page, but
+       don't force every section onto its own fresh page — a forced break
+       per section wastes whitespace and can push a 12-13 page report past
+       the assignment's 10-15 page target for no content reason. */
+    h2.section-title { page-break-after: avoid; break-after: avoid; }
+    figure, table, .demo-block { page-break-inside: avoid; break-inside: avoid; }
     .page { padding: 1rem; }
   }
 </style>
