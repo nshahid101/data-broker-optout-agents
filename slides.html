@@ -12,22 +12,37 @@
   the same arrow-key/click navigation guarantees true self-containment
   with zero external dependencies. Flagging this choice explicitly rather
   than silently picking one approach.
+
+  Color theme: matches the live app's own dark/mint palette (a deliberate,
+  documented one-off exception to this course's classic-palette default —
+  see memory note "Color theme override for this project only"), not
+  report.html's classic navy/cream/gold. Fonts use the same stacks as the
+  app (Fraunces/JetBrains Mono/Inter with system fallbacks) so this still
+  renders correctly offline if the Google Fonts aren't reachable.
 -->
 <style>
   :root {
-    --navy: #1b2a4a;
-    --cream: #f6f1e7;
-    --gold: #b98a2b;
-    --muted-red: #8a3b3b;
-    --dark-gray: #2e2e2e;
-    --accent: #2f6e4e;
+    --bg: #0b0b0c;
+    --bg-elevated: #17171a;
+    --bg-card: #1f1f23;
+    --text: #ededee;
+    --text-muted: #9a9aa0;
+    --accent: #8fe3b0;
+    --accent-dim: #5fae82;
+    --amber: #e3b44f;
+    --amber-dim: #a9833a;
+    --warn: #e3858f;
+    --border: #2d2d32;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-mono: "JetBrains Mono", "Courier New", monospace;
+    --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   html, body {
     margin: 0;
     height: 100%;
-    font-family: Georgia, "Times New Roman", serif;
-    background: var(--navy);
+    font-family: var(--font-body);
+    background: var(--bg);
     overflow: hidden;
   }
   .deck {
@@ -42,70 +57,88 @@
     flex-direction: column;
     justify-content: center;
     padding: 5vh 7vw;
-    background: var(--cream);
-    color: var(--dark-gray);
+    background: var(--bg);
+    color: var(--text);
   }
   .slide.active { display: flex; }
   .slide.title-slide {
-    background: var(--navy);
-    color: var(--cream);
+    background: var(--bg-elevated);
+    color: var(--text);
     justify-content: center;
     align-items: center;
     text-align: center;
   }
   .slide h1 {
-    font-size: 3rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 3.2rem;
     margin: 0 0 0.5rem;
-    color: var(--cream);
+    color: var(--text);
   }
   .slide.title-slide .byline {
-    color: var(--gold);
+    color: var(--accent);
     font-size: 1.3rem;
     font-style: italic;
+    font-family: var(--font-display);
     margin-bottom: 1.5rem;
   }
   .slide h2 {
-    font-size: 2.2rem;
-    color: var(--navy);
-    border-bottom: 4px solid var(--gold);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2.3rem;
+    color: var(--text);
+    border-bottom: 4px solid var(--accent);
     padding-bottom: 0.3rem;
     margin: 0 0 1.2rem;
   }
-  .slide p, .slide li { font-size: 1.25rem; line-height: 1.5; }
+  .slide p, .slide li { font-size: 1.25rem; line-height: 1.5; color: var(--text); }
   .slide ul { padding-left: 1.4rem; }
   .slide li { margin: 0.5rem 0; }
-  .mono { font-family: "Courier New", monospace; background: #e9e2cf; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.85em; }
+  .mono {
+    font-family: var(--font-mono);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
   .slide-number {
     position: absolute;
     bottom: 1.2rem;
     right: 1.5rem;
     font-size: 0.9rem;
-    color: #999;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
   }
   .repo-note {
-    background: #fff8e6;
-    border: 2px dashed var(--gold);
+    background: var(--bg-card);
+    border: 2px dashed var(--amber);
     padding: 0.8rem 1.2rem;
     border-radius: 6px;
     font-size: 1rem;
     margin-top: 1rem;
-    color: var(--dark-gray);
+    color: var(--text);
   }
-  .repo-note strong { color: var(--muted-red); }
+  .repo-note strong { color: var(--amber); }
+  .repo-note a { color: var(--accent); }
   .cols { display: flex; gap: 2.5rem; align-items: flex-start; flex: 1; }
   .cols > div { flex: 1; }
-  .cols img { max-width: 100%; border-radius: 6px; border: 1px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+  .cols img { max-width: 100%; border-radius: 6px; border: 1px solid var(--border); box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
   .broker-row { display: flex; gap: 1.2rem; margin-top: 1rem; }
   .broker-box {
     flex: 1;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1rem;
-    background: #fffdf7;
+    background: var(--bg-card);
   }
-  .broker-box h4 { margin: 0 0 0.3rem; color: var(--navy); }
+  .broker-box h4 { margin: 0 0 0.3rem; color: var(--text); font-family: var(--font-display); }
+  .broker-box p { color: var(--text-muted); }
   .badge {
     display: inline-block;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
     text-transform: uppercase;
     padding: 0.15em 0.5em;
@@ -113,24 +146,26 @@
     font-weight: bold;
     margin-bottom: 0.4rem;
   }
-  .badge.full { background: #d7ecd9; color: #1f5c32; }
-  .badge.partial { background: #f5e4c2; color: #7a5a14; }
-  .badge.manual { background: #f0d7d7; color: #7a2424; }
+  .badge.full { background: var(--accent); color: #06140c; }
+  .badge.partial { background: var(--amber); color: #2b1f06; }
+  .badge.manual { background: var(--warn); color: #2b0d11; }
   .stat-row { display: flex; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
   .stat {
-    background: #fffdf7;
-    border: 1px solid #ccc;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1rem 1.6rem;
     text-align: center;
   }
-  .stat .value { font-size: 2.1rem; color: var(--accent); font-weight: bold; display: block; }
-  .stat .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat .value { font-size: 2.1rem; color: var(--accent); font-weight: bold; display: block; font-family: var(--font-display); }
+  .stat .label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-family: var(--font-mono); }
   .pass { color: var(--accent); font-weight: bold; }
   .demo-mini {
-    background: #1e1e1e;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
     color: #cde9d6;
-    font-family: "Courier New", monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     padding: 0.8rem 1rem;
     border-radius: 6px;
@@ -147,16 +182,16 @@
     z-index: 10;
   }
   .nav-controls button {
-    background: var(--gold);
+    background: var(--accent);
     border: none;
-    color: var(--navy);
+    color: #06140c;
     font-weight: bold;
     padding: 0.5em 1.1em;
     border-radius: 999px;
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: var(--font-display);
   }
-  .nav-controls button:disabled { opacity: 0.4; cursor: default; }
+  .nav-controls button:disabled { opacity: 0.35; cursor: default; }
 </style>
 </head>
 <body>
@@ -186,7 +221,7 @@
 
   <section class="slide">
     <h2>What's new here</h2>
-    <p>Not a new idea — DeleteMe/Incogni/Optery already do this. What's different: <strong>transparency</strong>.</p>
+    <p>Not a new idea — DeleteMe/Incogni/Optery already do this. What's different: <strong style="color:var(--accent);">transparency</strong>.</p>
     <ul>
       <li>Every agent action is logged and streamed live to the UI — nothing happens off-screen</li>
       <li>Every candidate listing is shown with its confidence score; the human decides, never the agent</li>
@@ -210,7 +245,7 @@
         <p>Model: <span class="mono">gpt-6-luna</span> via Portkey — the only model used anywhere.</p>
       </div>
       <div>
-        <div class="demo-mini" style="color:#cde9d6;">User
+        <div class="demo-mini">User
   │
   ▼
 Orchestrator ──delegate()──► Discovery
@@ -284,7 +319,7 @@ RESULT: <span class="pass">PASS</span></div>
       <li>Several opt-outs were actually submitted and are tracked live in the app's "Pending confirmations" tab</li>
       <li>At $0.0351/run, this costs a small fraction of a cent per person — versus $80-130/year for a closed-source commercial alternative</li>
     </ul>
-    <p><em>Honest limit: all evidence here is from one real user so far — not yet tested against a second person's information.</em></p>
+    <p><em style="color:var(--text-muted);">Honest limit: all evidence here is from one real user so far — not yet tested against a second person's information.</em></p>
     <div class="slide-number">8 / 9</div>
   </section>
 
