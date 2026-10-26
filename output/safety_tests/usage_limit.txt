@@ -1,0 +1,16 @@
+======================================================================
+SAFETY DEMO: overspending / runaway-loop protection
+======================================================================
+
+[1] Running a real discovery task with a deliberately tiny budget: UsageLimits(request_limit=1, total_tokens_limit=50)
+
+[2] run_agent() returned (did not raise, did not hang):
+---
+Stopped: this run hit its token/request budget (Exceeded the total_tokens_limit of 50 (total_tokens=533)). This is the overspending safety control — escalate to a human instead of continuing to retry.
+---
+
+[3] Did it stop cleanly with the overspending message? True
+
+======================================================================
+RESULT: PASS
+======================================================================

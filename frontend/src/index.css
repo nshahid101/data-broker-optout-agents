@@ -1,0 +1,170 @@
+/* Always reserve space for the vertical scrollbar, scrollbar or not —
+   without this, any action that pushes page height past the viewport
+   (like expanding a manual-step card's instructions) makes the scrollbar
+   pop into existence and shift the entire layout, including the
+   right-hand column, sideways by its width. */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+:root {
+  /* Dark theme, per-project exception to the classic-palette rule —
+     see memory/project_final_project_submission.md */
+  --bg: #0b0b0c;
+  --bg-elevated: #17171a;
+  --bg-card: #1f1f23;
+  --text: #ededee;
+  --text-muted: #9a9aa0;
+  --accent: #8fe3b0;
+  --accent-dim: #5fae82;
+  /* Secondary semantic accent — amber for "needs your action" / manual
+     steps, distinct from mint's "automated / done" meaning. */
+  --amber: #e3b44f;
+  --amber-dim: #a9833a;
+  --warn: #e3858f;
+  --border: #2d2d32;
+
+  /* Editorial serif for display headlines (premium DTC/fashion-site
+     inspired — e.g. lululemon.com, ganni.com's minimal, refined type
+     pairing), clean sans for body, tracked mono for small labels. */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  color-scheme: dark;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: normal;
+  color: var(--text);
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.5em;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.muted {
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.btn:hover {
+  filter: brightness(1.06);
+}
+
+.btn:active {
+  transform: translateY(3px);
+}
+
+.btn--navy {
+  background: linear-gradient(180deg, var(--text) 0%, #cfcfd2 100%);
+  color: var(--bg);
+  font-weight: 600;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 4px 0 #9a9aa0,
+    0 6px 14px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn--navy:active {
+  box-shadow:
+    0 1px 0 #9a9aa0,
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn--gold,
+.btn--red {
+  background: linear-gradient(180deg, #a9f0c4 0%, var(--accent) 100%);
+  color: #06140c;
+  font-weight: 600;
+  box-shadow:
+    0 4px 0 #3f8560,
+    0 6px 14px rgba(95, 174, 130, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.btn--gold:active,
+.btn--red:active {
+  box-shadow:
+    0 1px 0 #3f8560,
+    0 2px 6px rgba(95, 174, 130, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn--amber {
+  background: linear-gradient(180deg, #f0d48a 0%, var(--amber) 100%);
+  color: #2b1e04;
+  font-weight: 600;
+  box-shadow:
+    0 4px 0 var(--amber-dim),
+    0 6px 14px rgba(227, 180, 79, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.btn--amber:active {
+  box-shadow:
+    0 1px 0 var(--amber-dim),
+    0 2px 6px rgba(227, 180, 79, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.alert {
+  background-color: rgba(227, 133, 143, 0.12);
+  border: 1px solid var(--warn);
+  color: var(--warn);
+  padding: 0.75em 1em;
+  border-radius: 6px;
+  margin-bottom: 1em;
+}

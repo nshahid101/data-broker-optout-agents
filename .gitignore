@@ -1,0 +1,22 @@
+# Secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
+# Playwright
+**/.cache/ms-playwright/
+
+# Working data
+data/*.db
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db

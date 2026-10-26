@@ -1,0 +1,1075 @@
+.app {
+  width: 100%;
+}
+
+/* Full-bleed alternating sections, each with its own background — no
+   single boxed container around the whole page. */
+.band {
+  width: 100%;
+  padding: 3.5rem 1.5rem;
+}
+
+.band--hero {
+  background: var(--bg);
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.band--vision {
+  background: var(--bg-elevated);
+}
+
+.band--tool {
+  background: var(--bg);
+}
+
+.band--data {
+  background: var(--bg-elevated);
+}
+
+.band__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.band__inner--narrow {
+  max-width: 640px;
+  text-align: center;
+}
+
+.band__inner > .mono-label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.band__inner--narrow > .mono-label {
+  margin-bottom: 1rem;
+}
+
+.band__title {
+  margin-bottom: 1.5rem;
+}
+
+.band__statement {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Tool tabs — swap content in place instead of stacking panels, so a
+   persistent section (like pending confirmations) never adds scroll
+   height when it isn't the one being looked at. */
+.tool-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.tool-tabs__tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  padding: 0.5em 0.2em 0.6em;
+  cursor: pointer;
+  margin-right: 1.5rem;
+}
+
+.tool-tabs__tab:hover {
+  color: var(--text);
+}
+
+.tool-tabs__tab--active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.run-reset-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.run-reset-row__btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+}
+
+.run-reset-row__btn:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.run-reset-row__btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Marquee divider strip */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  background: var(--accent);
+  padding: 0.6rem 0;
+  white-space: nowrap;
+}
+
+.marquee__track {
+  display: inline-flex;
+  animation: marquee-scroll 18s linear infinite;
+}
+
+.marquee--reverse .marquee__track {
+  animation-direction: reverse;
+}
+
+.marquee__track span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #06140c;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.app__bottom-footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--bg);
+}
+
+.app__bottom-footer .mono-label {
+  color: var(--text-muted);
+}
+
+/* Intro overlay */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: radial-gradient(ellipse at 50% 20%, #1a1a1e 0%, var(--bg) 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.intro-overlay--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-overlay canvas {
+  touch-action: none;
+}
+
+.intro-overlay__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.intro-overlay__skip {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.5em 1.2em;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.app__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.app__logo {
+  width: 72px;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Occasional blink, not constant — a long quiet cycle with one quick
+   blink, so the header logo feels alive without being distracting. */
+.app__logo-lid {
+  fill: var(--bg);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: header-logo-blink 7s ease-in-out infinite;
+}
+
+@keyframes header-logo-blink {
+  0%, 94%, 100% {
+    transform: scaleY(0);
+  }
+  96%, 98% {
+    transform: scaleY(1);
+  }
+}
+
+.app__header h1 {
+  color: var(--text);
+}
+
+.app__header p {
+  color: var(--text-muted);
+}
+
+.app__main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .app__main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app__column {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+/* The dashboard column is usually much shorter than the form — stick it
+   so scrolling the form doesn't leave a tall empty gap beside it. */
+.app__column--dashboard {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+
+@media (max-width: 860px) {
+  .app__column--dashboard {
+    position: static;
+    max-height: none;
+  }
+}
+
+.app__footer {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 860px) {
+  .app__footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app__footer .app__column {
+  background: var(--bg-elevated);
+}
+
+/* PersonForm */
+.person-form__intro {
+  margin-top: 0;
+  color: var(--text-muted);
+}
+
+.person-form__required-note {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.person-form__field-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.person-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.person-form__grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.person-form__grid input {
+  padding: 0.5em;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  background: var(--bg-card);
+  color: var(--text);
+}
+
+.person-form__grid input.has-error {
+  border-color: var(--warn);
+  box-shadow: 0 0 0 1px var(--warn);
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: var(--warn);
+}
+
+.field-error--summary {
+  display: block;
+  margin: -0.5rem 0 1rem;
+}
+
+.person-form__brokers {
+  margin-bottom: 1.25rem;
+}
+
+.person-form__brokers > .mono-label {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.broker-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.broker-card {
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem;
+  cursor: pointer;
+  color: var(--text);
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.broker-card:hover {
+  border-color: var(--accent-dim);
+}
+
+.broker-card--selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 16px rgba(143, 227, 176, 0.15);
+}
+
+.broker-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.broker-card__name {
+  font-weight: 600;
+}
+
+.broker-card__check {
+  color: var(--accent);
+  font-weight: 700;
+  width: 1em;
+}
+
+.broker-card__badge {
+  align-self: flex-start;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  padding: 0.2em 0.55em;
+  border-radius: 999px;
+}
+
+.broker-card__detail {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ManualStepCard */
+.manual-step-card {
+  background: var(--bg-card);
+  border: 1px dashed var(--amber-dim);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.manual-step-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.manual-step-card__header--toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+
+.manual-step-card__header h4 {
+  margin: 0;
+  flex: 1;
+}
+
+.manual-step-card__chevron {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.manual-step-card__collapsed-hint {
+  margin: 0;
+  font-size: 0.78rem;
+}
+
+.manual-step-card__badge {
+  background: var(--amber);
+  color: #2b1e04;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2em 0.6em;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.manual-step-card__steps {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+}
+
+.manual-step-card__direct-link {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0;
+  word-break: break-all;
+}
+
+.manual-step-card__direct-link a {
+  color: var(--amber);
+}
+
+.manual-step-card__saved-urls {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.manual-step-card__saved-urls li {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35em 0.6em;
+  word-break: break-all;
+}
+
+.manual-step-card__saved-urls a {
+  color: var(--accent);
+}
+
+.manual-step-card__url-warning {
+  margin: 0.6rem 0 0;
+  padding: 0.5em 0.7em;
+  background: rgba(227, 180, 79, 0.1);
+  border: 1px solid var(--amber);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: var(--text);
+}
+
+.manual-step-card__save-anyway {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--amber);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.manual-step-card__input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.manual-step-card__input-row input {
+  flex: 1;
+  padding: 0.5em;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.manual-step-card__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* RunDashboard */
+/* Pinned to the top of .app__column--dashboard's own scroll area (not
+   just the page) — negative margins extend it into that column's padding
+   so it fully covers the gap, then padding/background make it opaque.
+   Holds status + timing + the broker pipeline stepper together, so the
+   whole "what's happening right now" picture — including the expected-time
+   line — stays visible no matter how far the user scrolls through the
+   listing picker/results/log below it, not just the connection dot. */
+.run-dashboard__sticky-header {
+  position: sticky;
+  top: -1.5rem;
+  z-index: 2;
+  background: var(--bg-elevated);
+  margin: -1.5rem -1.5rem 1rem;
+  padding: 1.5rem 1.5rem 0.75rem;
+  border-radius: 10px 10px 0 0;
+  /* Separates the pinned header from whatever scrolls underneath it. */
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 12px -8px rgba(0, 0, 0, 0.4);
+}
+
+.run-dashboard__status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot--live {
+  background: var(--accent);
+}
+
+.dot--off {
+  background: #666;
+}
+
+.run-dashboard__log {
+  background: var(--bg);
+  color: #d8d8da;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  height: 300px;
+  overflow-y: auto;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+}
+
+.run-dashboard__event {
+  padding: 0.2em 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.run-dashboard__event-time {
+  color: var(--accent);
+  margin-right: 0.5em;
+}
+
+.run-dashboard__event--error {
+  color: var(--warn);
+}
+
+/* Shared by WhitepagesCallHelp and SpokeoEmailHelp — a troubleshooting
+   callout for a known broker-side friction point, shown after the user
+   actually submits an opt-out for that broker. */
+.broker-help-box {
+  margin-top: 1rem;
+  background: var(--bg-card);
+  border-left: 3px solid var(--amber);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.broker-help-box h3 {
+  margin: 0 0 0.4rem;
+}
+
+.broker-help-box p {
+  margin: 0 0 0.6rem;
+}
+
+.broker-help-box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.broker-help-box + .broker-help-box {
+  margin-top: 0.6rem;
+}
+
+.run-dashboard__summary {
+  margin-top: 1rem;
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.run-dashboard__summary p {
+  /* Each broker gets its own line (joined with \n in main.py) — without
+     this, multiple brokers' one-line summaries run together into one
+     unreadable paragraph. */
+  white-space: pre-line;
+  /* Safety net: agent-written text is stripped of URLs before it gets
+     here (see stripUrls() in App.tsx), but any other long unbroken token
+     should still wrap inside the box instead of overflowing it. */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.optout-result + .optout-result {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--border);
+}
+
+/* Each listing's URL gets its own clearly-labeled row instead of being
+   buried mid-sentence in the result text — the whole point being that a
+   user can glance at this and know exactly what to paste where. */
+.optout-result__listings {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.optout-result__listing {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4em 0.6em;
+}
+
+.optout-result__listing-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.optout-result__listing-url {
+  flex: 1;
+  font-size: 0.75rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.run-dashboard__log-toggle {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  background: none;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.run-dashboard__log-toggle:hover {
+  border-color: var(--accent-dim);
+  color: var(--text);
+}
+
+/* BrokerPipeline */
+.broker-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.broker-pipeline__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.broker-pipeline__name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.broker-pipeline__steps {
+  display: flex;
+  align-items: center;
+}
+
+.broker-pipeline__step-wrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.broker-pipeline__step {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 0.3em 0.6em;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.broker-pipeline__step-icon {
+  font-size: 0.7rem;
+}
+
+.broker-pipeline__step--running {
+  color: var(--amber);
+  border-color: var(--amber-dim);
+  background: rgba(227, 180, 79, 0.08);
+}
+
+.broker-pipeline__step--done {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: rgba(143, 227, 176, 0.08);
+}
+
+.broker-pipeline__connector {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin: 0 0.3rem;
+  min-width: 0.75rem;
+}
+
+.broker-pipeline__note {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+/* Empty states */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.empty-state__icon {
+  width: 56px;
+  height: 36px;
+  color: var(--border);
+}
+
+/* CostPanel */
+.cost-panel__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cost-panel__stats > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.cost-panel__stat-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.cost-panel__stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cost-panel__note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* PendingConfirmations — always visible, independent of the current run */
+.pending-confirmations {
+  background: var(--bg-card);
+  border: 1px solid var(--amber-dim);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.pending-confirmations h3 {
+  margin-top: 0.25rem;
+}
+
+/* ListingPicker */
+.listing-picker {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.listing-picker__intro {
+  margin-top: 0;
+  font-size: 0.85rem;
+}
+
+.listing-picker__broker {
+  margin-bottom: 1.25rem;
+}
+
+.listing-picker__broker h4 {
+  margin-bottom: 0.5rem;
+}
+
+.listing-picker__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.listing-picker__item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.listing-picker__item--dismissable {
+  position: relative;
+  padding-right: 2.6rem;
+}
+
+.listing-picker__dismiss {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+
+.listing-picker__dismiss:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--bg-elevated);
+}
+
+.listing-picker__dismiss:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.listing-picker__item label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.listing-picker__item input[type="checkbox"] {
+  margin-top: 0.3rem;
+}
+
+.listing-picker__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.listing-picker__name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.listing-picker__confidence {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.listing-picker__link {
+  font-size: 0.78rem;
+  color: var(--accent-dim);
+  align-self: flex-start;
+}
+
+.listing-picker__status {
+  font-size: 0.75rem;
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.listing-picker__confirm-link {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border);
+}
+
+.listing-picker__confirm-link p {
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+}
+
+.listing-picker__confirm-link--done {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.listing-picker__mark-confirmed {
+  display: block;
+  margin-top: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.75rem;
+  color: var(--accent-dim);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.listing-picker__mark-confirmed:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* Timing / ETA */
+.run-dashboard__timing {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* HistoryPanel */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+  text-align: left;
+  padding: 0.5em;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.history-table th {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.history-table td {
+  color: var(--text);
+}
+
+.history-table__run-id {
+  font-family: "Courier New", monospace;
+}

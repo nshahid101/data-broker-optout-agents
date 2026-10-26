@@ -1,0 +1,39 @@
+======================================================================
+SAFETY DEMO: domain allowlist
+======================================================================
+
+[PASS] broker=spokeo         url='https://www.spokeo.com/p123456789'
+       expected_allowed=True  actual_allowed=True
+       allowed
+
+[PASS] broker=spokeo         url='https://spokeo.com/p123456789'
+       expected_allowed=True  actual_allowed=True
+       allowed
+
+[PASS] broker=whitepages     url='https://www.whitepages.com/name/Jane-Doe/Austin-TX/Pabc123'
+       expected_allowed=True  actual_allowed=True
+       allowed
+
+[PASS] broker=beenverified   url='https://www.beenverified.com/f/optout/search'
+       expected_allowed=True  actual_allowed=True
+       allowed
+
+[PASS] broker=spokeo         url='https://www.evil-phishing-site.com/fake-spokeo-optout'
+       expected_allowed=False  actual_allowed=False
+       blocked: Refusing to act on 'https://www.evil-phishing-site.com/fake-spokeo-optout' for broker spokeo: host 'www.evil-phishing-site.com' is not under the allowlisted domain 'spokeo.com'.
+
+[PASS] broker=spokeo         url='https://spokeo.com.evil-phishing-site.com/optout'
+       expected_allowed=False  actual_allowed=False
+       blocked: Refusing to act on 'https://spokeo.com.evil-phishing-site.com/optout' for broker spokeo: host 'spokeo.com.evil-phishing-site.com' is not under the allowlisted domain 'spokeo.com'.
+
+[PASS] broker=whitepages     url='https://www.spokeo.com/p123456789'
+       expected_allowed=False  actual_allowed=False
+       blocked: Refusing to act on 'https://www.spokeo.com/p123456789' for broker whitepages: host 'www.spokeo.com' is not under the allowlisted domain 'whitepages.com'.
+
+[PASS] broker=beenverified   url='javascript:alert(1)'
+       expected_allowed=False  actual_allowed=False
+       blocked: Refusing to act on 'javascript:alert(1)' for broker beenverified: host '' is not under the allowlisted domain 'beenverified.com'.
+
+======================================================================
+RESULT: PASS (8 cases)
+======================================================================

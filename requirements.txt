@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+portkey-ai
+python-dotenv
+pydantic
+httpx
+pydantic-ai-slim[openai]==1.107.7
+openai
+playwright
+aiosqlite
