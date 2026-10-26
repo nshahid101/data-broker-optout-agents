@@ -3,23 +3,40 @@
 <head>
 <meta charset="UTF-8" />
 <title>Data Broker Opt-Out Agents — Final Project Report</title>
+<!--
+  Color theme: matches the live app's own dark/mint palette, not this
+  course's classic-palette default — a deliberate, documented one-off
+  exception (see memory note "Color theme override for this project
+  only"), applied consistently across the app, slides.html, and now this
+  report too. Screen view uses the app's real dark theme; the @media
+  print block below switches to a light, ink-practical layout for the
+  10-15 printed pages this needs to work as, while keeping the same mint/
+  amber accent colors for visual continuity with the on-screen version.
+-->
 <style>
   :root {
-    --navy: #1b2a4a;
-    --cream: #f6f1e7;
-    --gold: #b98a2b;
-    --muted-red: #8a3b3b;
-    --dark-gray: #2e2e2e;
-    --border: #d8d0bd;
-    --accent: #2f6e4e;
+    --bg: #0b0b0c;
+    --bg-elevated: #17171a;
+    --bg-card: #1f1f23;
+    --text: #ededee;
+    --text-muted: #9a9aa0;
+    --accent: #8fe3b0;
+    --accent-dim: #5fae82;
+    --amber: #e3b44f;
+    --amber-dim: #a9833a;
+    --warn: #e3858f;
+    --border: #2d2d32;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-mono: "JetBrains Mono", "Courier New", monospace;
+    --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   body {
-    font-family: Georgia, "Times New Roman", serif;
-    color: var(--dark-gray);
-    background: var(--cream);
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
     margin: 0;
-    line-height: 1.55;
+    line-height: 1.6;
   }
   .page {
     max-width: 850px;
@@ -27,19 +44,24 @@
     padding: 2.5rem 2.5rem 1rem;
   }
   header.titleblock {
-    background: var(--navy);
-    color: var(--cream);
+    background: var(--bg-elevated);
+    color: var(--text);
     padding: 2.5rem 2.5rem 2rem;
     margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
   }
   header.titleblock h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
     margin: 0 0 0.4rem;
-    font-size: 2.1rem;
+    font-size: 2.3rem;
   }
   header.titleblock .subtitle {
-    color: var(--gold);
+    color: var(--accent);
     font-size: 1.05rem;
     font-style: italic;
+    font-family: var(--font-display);
     margin-bottom: 1.2rem;
   }
   header.titleblock .meta-row {
@@ -47,21 +69,32 @@
     flex-wrap: wrap;
     gap: 1.5rem;
     font-size: 0.95rem;
-    border-top: 1px solid rgba(246,241,231,0.25);
+    border-top: 1px solid var(--border);
     padding-top: 1rem;
   }
-  header.titleblock .meta-row div strong { color: var(--gold); display: block; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.2rem; }
-  header.titleblock a { color: #cfe3d6; }
+  header.titleblock .meta-row div strong {
+    color: var(--amber);
+    display: block;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  header.titleblock a { color: var(--accent); }
 
   h2.section-title {
-    font-size: 1.5rem;
-    color: var(--navy);
-    border-bottom: 3px solid var(--gold);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--text);
+    border-bottom: 3px solid var(--accent);
     padding-bottom: 0.3rem;
     margin-top: 2.6rem;
   }
   h3 {
-    color: var(--muted-red);
+    font-family: var(--font-display);
+    color: var(--amber);
     font-size: 1.15rem;
     margin-top: 1.6rem;
   }
@@ -69,8 +102,10 @@
   ul, ol { margin: 0.6rem 0; padding-left: 1.4rem; }
   li { margin: 0.35rem 0; }
   code, .mono {
-    font-family: "Courier New", monospace;
-    background: #efe9da;
+    font-family: var(--font-mono);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--accent);
     padding: 0.1em 0.35em;
     border-radius: 3px;
     font-size: 0.9em;
@@ -83,11 +118,11 @@
     max-width: 100%;
     border: 1px solid var(--border);
     border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
   figcaption {
     font-size: 0.85rem;
-    color: #555;
+    color: var(--text-muted);
     margin-top: 0.4rem;
     font-style: italic;
   }
@@ -102,26 +137,27 @@
     padding: 0.45rem 0.6rem;
     text-align: left;
   }
-  th { background: var(--navy); color: var(--cream); }
-  tr:nth-child(even) { background: #efe9da; }
+  th { background: var(--bg-elevated); color: var(--accent); font-family: var(--font-mono); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  tr:nth-child(even) { background: var(--bg-card); }
   .callout {
-    background: #eef3ee;
+    background: var(--bg-card);
     border-left: 4px solid var(--accent);
     padding: 0.8rem 1rem;
     margin: 1rem 0;
     font-size: 0.95rem;
   }
   .warn-callout {
-    background: #f6e9e9;
-    border-left: 4px solid var(--muted-red);
+    background: var(--bg-card);
+    border-left: 4px solid var(--warn);
     padding: 0.8rem 1rem;
     margin: 1rem 0;
     font-size: 0.95rem;
   }
   .demo-block {
-    background: #1e1e1e;
-    color: #d8d8d8;
-    font-family: "Courier New", monospace;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: #cde9d6;
+    font-family: var(--font-mono);
     font-size: 0.82rem;
     padding: 1rem;
     border-radius: 6px;
@@ -130,7 +166,7 @@
     margin: 0.8rem 0;
     line-height: 1.4;
   }
-  .demo-block .pass { color: #7fd99a; font-weight: bold; }
+  .demo-block .pass { color: var(--accent); font-weight: bold; }
   .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -146,11 +182,12 @@
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 0.9rem;
-    background: #fffdf7;
+    background: var(--bg-card);
   }
-  .broker-card h4 { margin: 0 0 0.3rem; color: var(--navy); }
+  .broker-card h4 { margin: 0 0 0.3rem; color: var(--text); font-family: var(--font-display); }
   .badge {
     display: inline-block;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -159,27 +196,39 @@
     font-weight: bold;
     margin-bottom: 0.4rem;
   }
-  .badge.full { background: #d7ecd9; color: #1f5c32; }
-  .badge.partial { background: #f5e4c2; color: #7a5a14; }
-  .badge.manual { background: #f0d7d7; color: #7a2424; }
+  .badge.full { background: var(--accent); color: #06140c; }
+  .badge.partial { background: var(--amber); color: #2b1f06; }
+  .badge.manual { background: var(--warn); color: #2b0d11; }
   footer.pagefoot {
     text-align: center;
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.8rem;
     margin: 3rem 0 1rem;
     border-top: 1px solid var(--border);
     padding-top: 1rem;
+    font-family: var(--font-mono);
   }
-  .toc { background: #fffdf7; border: 1px solid var(--border); padding: 1rem 1.4rem; border-radius: 6px; }
-  .toc a { color: var(--navy); text-decoration: none; }
+  .toc { background: var(--bg-card); border: 1px solid var(--border); padding: 1rem 1.4rem; border-radius: 6px; }
+  .toc a { color: var(--accent); text-decoration: none; }
   .toc a:hover { text-decoration: underline; }
+
+  /* Print: switch to a light, ink-practical layout for the 10-15 printed
+     pages this needs to work as, while keeping the same mint/amber accent
+     colors for continuity with the on-screen dark version above. */
   @media print {
-    body { background: white; }
-    header.titleblock { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    /* Avoid orphaning a section title alone at the bottom of a page, but
-       don't force every section onto its own fresh page — a forced break
-       per section wastes whitespace and can push a 12-13 page report past
-       the assignment's 10-15 page target for no content reason. */
+    :root {
+      --bg: #ffffff;
+      --bg-elevated: #f3f3f3;
+      --bg-card: #f6f6f6;
+      --text: #1a1a1a;
+      --text-muted: #555555;
+      --border: #cccccc;
+    }
+    body { background: white; color: #1a1a1a; }
+    header.titleblock { background: #111827 !important; color: #ededee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header.titleblock .subtitle, header.titleblock a { color: #8fe3b0 !important; }
+    .demo-block { background: #1e1e1e !important; color: #d8d8d8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .demo-block .pass { color: #7fd99a !important; }
     h2.section-title { page-break-after: avoid; break-after: avoid; }
     figure, table, .demo-block { page-break-inside: avoid; break-inside: avoid; }
     .page { padding: 1rem; }
@@ -320,7 +369,7 @@ another and get a result back (the same pattern used elsewhere in this course). 
 </table>
 
 <h3>Organization diagram</h3>
-<pre class="demo-block" style="color:#cde9d6;">
+<pre class="demo-block">
 User (web UI)
    │
    ▼
